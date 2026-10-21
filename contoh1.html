@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Segar — Minuman Alami</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --cream: #faf7f2;
+            --white: #ffffff;
+            --text: #1a1a1a;
+            --muted: #6b6b6b;
+            --accent: #c8642a;
+            --accent-light: #f4e8de;
+            --border: #e8e0d6;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            background-color: var(--cream);
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 247, 242, 0.92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 0 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+
+        .logo {
+            font-family: "Playfair Display", serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--accent);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--muted);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text); }
+
+        .nav-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            border-radius: 100px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .nav-btn:hover { opacity: 0.85; }
+
+        /* HERO */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 80px 5%;
+            gap: 40px;
+            min-height: 90vh;
+        }
+
+        .hero-text { flex: 1; max-width: 520px; }
+
+        .hero-tag {
+            display: inline-block;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 600;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .hero-title span { color: var(--accent); }
+
+        .hero-desc {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 36px;
+            max-width: 420px;
+        }
+
+        .hero-actions { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 100px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s, transform 0.2s;
+        }
+
+        .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+            padding: 14px 32px;
+            border-radius: 100px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .btn-secondary:hover { border-color: var(--text); }
+
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-circle {
+            width: clamp(260px, 40vw, 440px);
+            height: clamp(260px, 40vw, 440px);
+            background: var(--accent-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(7rem, 14vw, 12rem);
+            position: relative;
+        }
+
+        .badge-float {
+            position: absolute;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .badge-float.top-right { top: 10%; right: -5%; }
+        .badge-float.bottom-left { bottom: 15%; left: -8%; }
+        .badge-float .num { font-size: 1.1rem; font-weight: 600; color: var(--accent); display: block; }
+
+        /* KEUNGGULAN */
+        .section { padding: 80px 5%; }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 600;
+            margin-bottom: 48px;
+            max-width: 420px;
+        }
+
+        .keunggulan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+        }
+
+        .keunggulan-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+        }
+
+        .keunggulan-icon {
+            font-size: 2rem;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .keunggulan-card h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .keunggulan-card p { font-size: 0.88rem; color: var(--muted); }
+
+        /* PRODUK */
+        .produk-section { background: var(--white); }
+
+        .produk-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 24px;
+        }
+
+        .produk-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .produk-card:hover { transform: translateY(-4px); }
+
+        .produk-img {
+            background: var(--accent-light);
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .produk-info { padding: 20px; }
+
+        .produk-nama {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 4px;
+        }
+
+        .produk-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 16px; }
+
+        .produk-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .produk-harga { font-weight: 600; font-size: 1rem; color: var(--accent); }
+
+        .produk-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 0.82rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .produk-btn:hover { opacity: 0.85; }
+
+        /* TESTIMONI */
+        .testi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .testi-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 24px;
+        }
+
+        .bintang { color: var(--accent); font-size: 0.85rem; margin-bottom: 12px; }
+
+        .testi-card p { font-size: 0.92rem; color: var(--muted); margin-bottom: 20px; font-style: italic; }
+
+        .testi-user { display: flex; align-items: center; gap: 12px; }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .testi-nama { font-size: 0.9rem; font-weight: 500; }
+        .testi-kota { font-size: 0.8rem; color: var(--muted); }
+
+        /* CTA */
+        .cta-section {
+            background: var(--accent);
+            color: white;
+            text-align: center;
+            padding: 80px 5%;
+            border-radius: 24px;
+            margin: 0 5% 80px;
+        }
+
+        .cta-section h2 {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p { font-size: 1rem; opacity: 0.85; margin-bottom: 32px; }
+
+        .btn-white {
+            background: white;
+            color: var(--accent);
+            border: none;
+            padding: 14px 36px;
+            border-radius: 100px;
+            font-family: "DM Sans", sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-white:hover { opacity: 0.9; }
+
+        /* FOOTER */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 32px 5%;
+            font-size: 0.85rem;
+        }
+
+        footer .logo-footer {
+            font-family: "Playfair Display", serif;
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; padding: 50px 5%; text-align: center; min-height: auto; }
+            .hero-desc { margin: 0 auto 28px; }
+            .hero-actions { justify-content: center; }
+            .nav-links { display: none; }
+            .badge-float.top-right { right: 0; }
+            .badge-float.bottom-left { left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">Segar.</div>
+        <ul class="nav-links">
+            <li><a href="#">Beranda</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#">Tentang</a></li>
+            <li><a href="#">Kontak</a></li>
+        </ul>
+        <button class="nav-btn">Pesan Sekarang</button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="hero-tag">🌿 100% Bahan Alami</span>
+            <h1 class="hero-title">Rasakan Kesegaran <span>Alami</span> di Setiap Tegukan</h1>
+            <p class="hero-desc">Minuman segar berbahan alami tanpa pengawet, hadir untuk menemani harimu dengan rasa yang murni dan menyegarkan.</p>
+            <div class="hero-actions">
+                <button class="btn-primary">Pesan Sekarang</button>
+                <button class="btn-secondary">Lihat Menu</button>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="hero-circle">
+                🥤
+                <div class="badge-float top-right">
+                    <span class="num">4.9 ⭐</span>
+                    Rating Pelanggan
+                </div>
+                <div class="badge-float bottom-left">
+                    <span class="num">10rb+</span>
+                    Pelanggan Puas
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEUNGGULAN -->
+    <section class="section">
+        <p class="section-label">Keunggulan</p>
+        <h2 class="section-title">Kenapa Pilih Segar?</h2>
+        <div class="keunggulan-grid">
+            <div class="keunggulan-card">
+                <span class="keunggulan-icon">🌿</span>
+                <h3>Bahan Alami</h3>
+                <p>Dipilih langsung dari kebun terpercaya, tanpa bahan kimia tambahan.</p>
+            </div>
+            <div class="keunggulan-card">
+                <span class="keunggulan-icon">❄️</span>
+                <h3>Selalu Segar</h3>
+                <p>Dibuat setiap hari, dikirim dalam kondisi dingin agar kualitas terjaga.</p>
+            </div>
+            <div class="keunggulan-card">
+                <span class="keunggulan-icon">🚀</span>
+                <h3>Pengiriman Cepat</h3>
+                <p>Tiba di tanganmu dalam 2 jam, fresh dan siap dinikmati.</p>
+            </div>
+            <div class="keunggulan-card">
+                <span class="keunggulan-icon">💚</span>
+                <h3>Sehat & Bergizi</h3>
+                <p>Kaya vitamin dan antioksidan untuk mendukung kesehatanmu setiap hari.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUK -->
+    <section class="section produk-section">
+        <p class="section-label">Menu Kami</p>
+        <h2 class="section-title">Pilihan Minuman Favorit</h2>
+        <div class="produk-grid">
+            <div class="produk-card">
+                <div class="produk-img">🍋</div>
+                <div class="produk-info">
+                    <p class="produk-nama">Lemon Mint Segar</p>
+                    <p class="produk-desc">Perpaduan lemon segar dan daun mint yang menyegarkan.</p>
+                    <div class="produk-footer">
+                        <span class="produk-harga">Rp 18.000</span>
+                        <button class="produk-btn">Pesan</button>
+                    </div>
+                </div>
+            </div>
+            <div class="produk-card">
+                <div class="produk-img">🍓</div>
+                <div class="produk-info">
+                    <p class="produk-nama">Strawberry Bliss</p>
+                    <p class="produk-desc">Manis alami dari stroberi segar tanpa gula tambahan.</p>
+                    <div class="produk-footer">
+                        <span class="produk-harga">Rp 22.000</span>
+                        <button class="produk-btn">Pesan</button>
+                    </div>
+                </div>
+            </div>
+            <div class="produk-card">
+                <div class="produk-img">🥑</div>
+                <div class="produk-info">
+                    <p class="produk-nama">Avocado Cream</p>
+                    <p class="produk-desc">Creamy dan kaya nutrisi, sempurna untuk sarapanmu.</p>
+                    <div class="produk-footer">
+                        <span class="produk-harga">Rp 25.000</span>
+                        <button class="produk-btn">Pesan</button>
+                    </div>
+                </div>
+            </div>
+            <div class="produk-card">
+                <div class="produk-img">🍵</div>
+                <div class="produk-info">
+                    <p class="produk-nama">Matcha Latte</p>
+                    <p class="produk-desc">Matcha premium Jepang dipadukan susu oat yang lembut.</p>
+                    <div class="produk-footer">
+                        <span class="produk-harga">Rp 28.000</span>
+                        <button class="produk-btn">Pesan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONI -->
+    <section class="section">
+        <p class="section-label">Testimoni</p>
+        <h2 class="section-title">Apa Kata Mereka?</h2>
+        <div class="testi-grid">
+            <div class="testi-card">
+                <div class="bintang">★★★★★</div>
+                <p>"Minumannya enak banget dan benar-benar segar! Jadi langganan tiap hari sekarang."</p>
+                <div class="testi-user">
+                    <div class="avatar">RA</div>
+                    <div>
+                        <p class="testi-nama">Rizky Aulia</p>
+                        <p class="testi-kota">Palembang</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="bintang">★★★★★</div>
+                <p>"Pengirimannya cepat dan minumannya masih dingin waktu sampai. Recommended!"</p>
+                <div class="testi-user">
+                    <div class="avatar">DN</div>
+                    <div>
+                        <p class="testi-nama">Dina Nuraini</p>
+                        <p class="testi-kota">Jakarta</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testi-card">
+                <div class="bintang">★★★★★</div>
+                <p>"Avocado Cream-nya juara! Bahan-bahannya terasa segar dan alami banget."</p>
+                <div class="testi-user">
+                    <div class="avatar">BF</div>
+                    <div>
+                        <p class="testi-nama">Budi Firmansyah</p>
+                        <p class="testi-kota">Bandung</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="cta-section">
+        <h2>Siap Merasakan Kesegaran?</h2>
+        <p>Pesan sekarang dan dapatkan gratis ongkir untuk pembelian pertamamu!</p>
+        <button class="btn-white">Pesan Sekarang</button>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p class="logo-footer">Segar.</p>
+        <p>© 2025 Segar. Semua hak dilindungi.</p>
+    </footer>
+
+</body>
+</html>
